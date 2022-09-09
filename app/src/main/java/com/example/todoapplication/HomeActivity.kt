@@ -16,17 +16,9 @@ class HomeActivity : AppCompatActivity() {
         val recyclerview = findViewById<RecyclerView>(R.id.rvList);
         recyclerview.layoutManager = LinearLayoutManager(this);
         // ArrayList of class ItemsViewModel
-        val data = ArrayList<String>()
-          data.add("Hello");
-          data.add("Hamropatro");
-          data.add("Nepal");
-          data.add("Usa");
-        data.add("Hello");
-        data.add("Hamropatro");
-        data.add("Nepal");
-        data.add("Usa");
 
-        val adapter = RvAdapter(data)
+
+        val adapter = RvAdapter()
 
         recyclerview.adapter = adapter
     }
