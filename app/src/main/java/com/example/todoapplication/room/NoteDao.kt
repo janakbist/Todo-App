@@ -6,7 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
      suspend fun insert(note: Note)
 
     @Update
@@ -15,6 +16,6 @@ interface NoteDao {
     @Delete
      suspend fun delete(note: Note)
 
-    @Query("SELECT * FROM notes ORDER BY title,description,image  DESC")
-    fun select(): LiveData<List<Note>>
+    @Query("SELECT * FROM notes ORDER BY id  DESC")
+     fun getAllNotes(): LiveData<List<Note>>
 }

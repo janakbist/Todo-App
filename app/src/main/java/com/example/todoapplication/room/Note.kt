@@ -7,15 +7,6 @@ import java.util.*
 
 @Entity(tableName = "notes")
 data class Note(
-    @PrimaryKey(autoGenerate = true)
-     val id  : Int,
-    @ColumnInfo(name = "title")
-    val title: String,
-    @ColumnInfo(name = "description")
-    val description: String,
-
-    @ColumnInfo(name = "image")
-    val image: String,
-//    https://developer.android.com/training/data-storage/room
-
-)
+    @ColumnInfo(name = "text")val text: String) {
+    @PrimaryKey(autoGenerate = true) var id =0
+}
