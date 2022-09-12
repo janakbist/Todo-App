@@ -37,7 +37,6 @@ class NotesRVAdapter(private val context:Context, private val listener:INotesRVA
     fun updateList(newList: List<Note>) {
         allNotes.clear()
         allNotes.addAll(newList)
-
         notifyDataSetChanged()
     }
 

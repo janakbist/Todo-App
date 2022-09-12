@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity(), NotesRVAdapter.INotesRVAdapter {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(false)
+        ViewCompat.setNestedScrollingEnabled(recyclerView, false)
         val adapter = NotesRVAdapter(this,this)
         recyclerView.adapter = adapter
 
@@ -49,7 +52,7 @@ class MainActivity : AppCompatActivity(), NotesRVAdapter.INotesRVAdapter {
         val noteText = input.text.toString()
         if (noteText.isNotEmpty()) {
 
-            viewModel.insertNote(Note(noteText))
+            viewModel.insertNote(noteText)
             Toast.makeText(this,"$noteText Inserted",Toast.LENGTH_LONG).show()
             input.setText("")
         }

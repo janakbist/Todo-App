@@ -20,7 +20,7 @@ class NoteViewModel(application: Application) :AndroidViewModel(application) {
     fun deleteNode(note:Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(note)
     }
-    fun insertNote(note:Note) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(note)
+    fun insertNote(noteText:String) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insert(Note(noteText))
     }
 }
