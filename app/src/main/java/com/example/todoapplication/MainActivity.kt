@@ -1,6 +1,7 @@
 package com.example.todoapplication
 
 import android.app.Application
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -26,10 +27,10 @@ class MainActivity : AppCompatActivity(), NotesRVAdapter.INotesRVAdapter {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(false)
-        ViewCompat.setNestedScrollingEnabled(recyclerView, false)
+
         val adapter = NotesRVAdapter(this,this)
         recyclerView.adapter = adapter
+
 
         viewModel = ViewModelProvider(this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application
@@ -44,7 +45,11 @@ class MainActivity : AppCompatActivity(), NotesRVAdapter.INotesRVAdapter {
 
     override fun onItemClicked(note: Note) {
         viewModel.deleteNode(note)
-        Toast.makeText(this,"${note.text} Deleted",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"${note.text} Deleted",Toast.LENGTH_SHORT).show()
+    }
+    override fun onItemClickedUpdate(message: Note) {
+        viewModel.updateNote(message)
+        Toast.makeText(this,"Data Updated",Toast.LENGTH_SHORT).show()
     }
 
     fun submitData(view: View) {
@@ -52,12 +57,12 @@ class MainActivity : AppCompatActivity(), NotesRVAdapter.INotesRVAdapter {
         val noteText = input.text.toString()
         if (noteText.isNotEmpty()) {
 
-            viewModel.insertNote(noteText)
-            Toast.makeText(this,"$noteText Inserted",Toast.LENGTH_LONG).show()
+            viewModel.insertNote(Note(0,noteText))
+            Toast.makeText(this,"$noteText Inserted",Toast.LENGTH_SHORT).show()
             input.setText("")
         }
         else{
-            Toast.makeText(this,"please write something",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"please write something",Toast.LENGTH_SHORT).show()
         }
     }
 
